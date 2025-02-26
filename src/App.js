@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import facturas from "./facturas.json";
+
+console.log(facturas);
 
 function App() {
+  const facturasRecibidas = facturas.map((factura) => {
+    if (factura.type === "received") {
+      return (
+        <li key={factura.id}>
+          <table>
+            <tr>
+              <td>{factura.organization_id}</td>
+              <td>{factura.amount}</td>
+              <td>{factura.currency}</td>
+              <td>{factura.type}</td>
+            </tr>
+          </table>
+        </li>
+      );
+    }
+  });
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul>{facturasRecibidas}</ul>
     </div>
   );
 }
